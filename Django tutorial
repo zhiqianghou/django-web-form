@@ -1,0 +1,44 @@
+Session 1: Basic operation of a django project
+    1. Not like flask, you don't need create app.py as django will create it for you.
+    2. install django command: pip install django
+    3. start the project command: django-admin startproject mysite .
+    4. start the app command: python manage.py startapp job_application_django
+    5. change setting in mysite, add the app name at the end, show below:
+    INSTALLED_APPS = [
+        "django.contrib.admin",
+        "django.contrib.auth",
+        "django.contrib.contenttypes",
+        "django.contrib.sessions",
+        "django.contrib.messages",
+        "django.contrib.staticfiles",
+        "job_application_django",
+    ]
+    6. run app server command:  python manage.py runserver
+    7. end the server: ctrl+c
+
+Session 2: Setting up database model
+    1. Modify models.py in job_application_django/migrations as below:
+
+        from django.db import models
+
+        class Form(models.Model):
+            first_name = models.CharField(max_length=80)
+            last_name = models.CharField(max_length=80)
+            email = models.EmailField()
+            date = models.DateField()
+            occupation = models.CharField(max_length=80)
+
+            def __str__(self):
+                return f"{self.first_name}, {self.last_name}"
+
+    2. make migration command: python manage.py makemigrations
+       This will create 0001_initial.py in migrations folder. and this .py file function like a middle man between
+       db.sqlite3 and Form class.
+
+    3. execute migration command: python manage.py migrate.
+       Now if open db.sqlite3, you should see the tables.
+
+
+
+
+
